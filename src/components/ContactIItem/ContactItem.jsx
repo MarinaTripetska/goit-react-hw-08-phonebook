@@ -6,6 +6,11 @@ import { Item, Name, Phone, Button } from './ContactsItem.styled';
 import { useDeleteContactMutation} from '../../redux/app';
 import { Modal } from '../Modal';
 import ContactForm from '../ContactForm';
+import toast from 'react-hot-toast';
+
+const notifySUCCESS = (text) => toast.success(text);
+const notifyERROR = (text) => toast.error(text);
+
 
 const ContactItem = ({ id, name, phone }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +25,7 @@ const ContactItem = ({ id, name, phone }) => {
 
       <Button
         type="button"
-        onClick={() => deleteContact(id)}
+        onClick={() => deleteContact(id).then(()=>notifySUCCESS(`${name} successfuly deleted!`)).catch(()=>notifyERROR('Something went wrong'))}
         disabled={isDeleting}
       >
         <AiFillDelete /> <span>{isDeleting ? '...Deleting' : 'Delete'}</span>

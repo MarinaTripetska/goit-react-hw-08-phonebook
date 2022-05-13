@@ -11,6 +11,7 @@ import {
 
 const notifyERROR = (text) => toast.error(text);
 const notifySUCCESS = (text) => toast.success(text);
+
 export default function ContactForm({ contactId, closeForm }) {
   const { data: contacts } = useSelector(
     contactsApi.endpoints.getAllContacts.select()
@@ -33,10 +34,11 @@ export default function ContactForm({ contactId, closeForm }) {
     const findSameName = contacts?.find(
       ({ name }) => name.toLowerCase() === inputName.toLowerCase()
     );
+    const values = {name: inputName, phone: inputNumber}
 //if modal open and we want update contact
     if (contactId) {
       !findSameName ?
-        editContact({id:contactId, name: inputName, phone: inputNumber }).unwrap()
+        editContact({id:contactId, ...values}).unwrap()
           .then(() => notifySUCCESS(`${inputName} updated`))
           .catch(r => notifyERROR(`Something went wrong. Eroor: ${r.status}`))
        : notifyERROR(`${inputName} is already in contacts!`);
@@ -46,10 +48,7 @@ export default function ContactForm({ contactId, closeForm }) {
     } else {
 //if we want create new contact
       !findSameName ?
-        createContact({
-          name: inputName,
-          phone: inputNumber,
-        }).unwrap()
+        createContact(values).unwrap()
           .then(() => notifySUCCESS(`New contact for ${inputName} added`))
           .catch(r => notifyERROR(`Something went wrong. Eroor: ${r.status}`))
         

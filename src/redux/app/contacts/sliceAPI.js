@@ -21,28 +21,24 @@ export const contactsApi = createApi({
     }),
 
     createContact: builder.mutation({
-      query: newContact => ({
+      query: (body) => ({
         url: '/contacts',
         method: 'POST',
-        body: {
-          name: newContact.name,
-          phone: newContact.phone,
-        },
+        body
       }),
       invalidatesTags: ['Contacts'],
     }),
 
-    editContact: builder.mutation({
-      query: ({id, name, phone}) => ({
+    editContact: builder.mutation(
+       {
+      query: ({id, ...body}) => ({
         url: `/contacts/${id}`,
         method: 'PUT',
-        body: {
-           name,
-          phone,
-        },
+        body,
       }),
       invalidatesTags: ['Contacts'],
-    }),
+      }
+    ),
 
     deleteContact: builder.mutation({
       query: contactId => ({
