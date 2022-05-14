@@ -17,7 +17,7 @@ export const ContactList = () => {
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
-    
+
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
@@ -26,7 +26,7 @@ export const ContactList = () => {
   return (
     <StyledList>
       {getVisibleContacts().map(c => (
-        <ContactItem key={c.id} id={c.id} name={c.name} phone={c.phone} />
+        <ContactItem key={c.id} contact={c} />
       ))}
     </StyledList>
   );

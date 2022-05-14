@@ -1,66 +1,23 @@
-import { useState } from 'react';
 import { MdAddIcCall } from 'react-icons/md';
-import { Form, AreaName, AreaNumber, SubmitBtn } from './ContactForm.styled';
-import { useSelector} from 'react-redux';
-import toast from 'react-hot-toast';
-import {
-  useCreateContactMutation,
-  useEditContactMutation,
-  contactsApi,
-} from '../../redux/app';
+import { AreaName, AreaNumber, Form, SubmitBtn } from './ContactForm.styled';
+import useSubmit from './onFormSubmit';
 
-const notifyERROR = (text) => toast.error(text);
-const notifySUCCESS = (text) => toast.success(text);
+export default function ContactForm({
+  contactId,
+  closeForm,
+  name = '',
+  number = '',
+}) {
+  const [inputName, setInputName, inputNumber, setInputNumber, handleSubmit] =
+    useSubmit({
+      contactId,
+      closeForm,
+      name,
+      number,
+    });
 
-export default function ContactForm({ contactId, closeForm }) {
-  const { data: contacts } = useSelector(
-    contactsApi.endpoints.getAllContacts.select()
-  );
-  const contactState = contacts?.find(contact => contact.id === contactId);
-
-  const [inputName, setInputName] = useState(() =>
-    contactId ? contactState.name : ''
-  );
-  const [inputNumber, setInputNumber] = useState(() =>
-    contactId ? contactState.phone : ''
-  );
-
-  const [createContact] = useCreateContactMutation();
-  const [editContact] = useEditContactMutation();
-
-  const onFormSubmit = e => {
-    e.preventDefault();
-
-    const findSameName = contacts?.find(
-      ({ name }) => name.toLowerCase() === inputName.toLowerCase()
-    );
-    const values = {name: inputName, phone: inputNumber}
-//if modal open and we want update contact
-    if (contactId) {
-      !findSameName ?
-        editContact({id:contactId, ...values}).unwrap()
-          .then(() => notifySUCCESS(`${inputName} updated`))
-          .catch(r => notifyERROR(`Something went wrong. Eroor: ${r.status}`))
-       : notifyERROR(`${inputName} is already in contacts!`);
-        
-      closeForm();
-
-    } else {
-//if we want create new contact
-      !findSameName ?
-        createContact(values).unwrap()
-          .then(() => notifySUCCESS(`New contact for ${inputName} added`))
-          .catch(r => notifyERROR(`Something went wrong. Eroor: ${r.status}`))
-        
-      : notifyERROR(`${inputName} is already in contacts!`);
-
-      setInputName('');
-      setInputNumber('');
-    }
-  };
-
-  return (   
-    <Form onSubmit={onFormSubmit}>
+  return (
+    <Form onSubmit={handleSubmit}>
       <AreaName>
         Name
         <input
@@ -90,12 +47,14 @@ export default function ContactForm({ contactId, closeForm }) {
       <br />
 
       <SubmitBtn type="submit">
-        <MdAddIcCall />
-        {contactId ? <span>Edit contact</span> : <span>Add contact</span>}
+        {contactId ? (
+          <span>Save changes</span>
+        ) : (
+          <span>
+            <MdAddIcCall /> Add contact
+          </span>
+        )}
       </SubmitBtn>
     </Form>
-
-
-
   );
 }
