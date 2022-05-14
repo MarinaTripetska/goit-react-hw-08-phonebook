@@ -1,6 +1,6 @@
 import { MdAddIcCall } from 'react-icons/md';
 import { AreaName, AreaNumber, Form, SubmitBtn } from './ContactForm.styled';
-import useSubmit from './onFormSubmit';
+import useFormOperations from './useFormOperations';
 
 export default function ContactForm({
   contactId,
@@ -9,7 +9,7 @@ export default function ContactForm({
   number = '',
 }) {
   const [inputName, setInputName, inputNumber, setInputNumber, handleSubmit] =
-    useSubmit({
+    useFormOperations({
       contactId,
       closeForm,
       name,
