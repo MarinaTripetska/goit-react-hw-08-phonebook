@@ -12,13 +12,13 @@ const root = createRoot(container);
 root.render(
   <>
     <React.StrictMode>
-      <BrowserRouter>
-      <GlobalStyle />
-      <Provider store={store}>
-        {/* <PersistGate loading={null} persistor={persistor}> */}
-        <App />
-        <Toaster/>
-        {/* </PersistGate> */}
+      <BrowserRouter basename="/goit-react-hw-08-phonebook/">
+        <GlobalStyle />
+        <Provider store={store}>
+          {/* <PersistGate loading={null} persistor={persistor}> */}
+          <App />
+          <Toaster />
+          {/* </PersistGate> */}
         </Provider>
       </BrowserRouter>
     </React.StrictMode>
