@@ -27,17 +27,37 @@ const logIn = createAsyncThunk('auth/login', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
-    //zrobic toster na bledy
+    //обработка ошибки error.message
   }
 });
 
 const logOut = createAsyncThunk('auth/loout', async () => {
   try {
-    const { data } = await axios.post('/users/logout');
+    await axios.post('/users/logout');
     token.unset();
   } catch (error) {
-    //zrobic toster na bledy
+    //обработка ошибки error.message
   }
 });
 
-export const authOperations = { register, logIn, logOut };
+const fetchCurrentUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue();
+    }
+
+    token.set(persistedToken);
+    try {
+      const { data } = await axios.get('/users/current');
+      return data;
+    } catch (error) {
+      //обработка ошибки error.message
+    }
+  }
+);
+
+export const authOperations = { register, logIn, logOut, fetchCurrentUser };

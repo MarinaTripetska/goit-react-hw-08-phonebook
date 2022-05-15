@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { MdPhoneEnabled } from 'react-icons/md';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { Item, Name, Phone, Button } from './ContactsItem.styled';
@@ -53,10 +53,10 @@ const ContactItem = ({ contact }) => {
   );
 };
 
-ContactItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
-};
+// ContactItem.propTypes = {
+//   id: PropTypes.string.isRequired,
+//   name: PropTypes.string.isRequired,
+//   number: PropTypes.string.isRequired,
+// };
 
 export default ContactItem;

@@ -1,7 +1,8 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { AppBar } from './components/AppBar';
 import { Routes, Route, Navigate } from 'react-router-dom';
-// import { HomePage, PhoneBookPage, LoginPage, RegistrationPage } from './pages';
+import { useDispatch } from 'react-redux';
+import { authOperations } from 'redux/app/authorization';
 
 const load = component => lazy(() => import(`./pages/${component}`));
 
@@ -11,22 +12,24 @@ const RegistrationPage = load('RegistrationPage');
 const LoginPage = load('LoginPage');
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
-    <>
-      {/* <AppBar /> */}
+    <Suspense fallback={<p>...loading</p>}>
+      <Routes>
+        <Route path="/" element={<AppBar />}>
+          <Route path="/" index element={<HomePage />} />
+          <Route path="phonebook" element={<PhoneBookPage />} />
+          <Route path="register" element={<RegistrationPage />} />
+          <Route path="login" element={<LoginPage />} />
+        </Route>
 
-      <Suspense fallback={<p>...loading</p>}>
-        <Routes>
-          <Route path="/" element={<AppBar />}>
-            <Route path="/" index element={<HomePage />} />
-            <Route path="phonebook" element={<PhoneBookPage />} />
-            <Route path="register" element={<RegistrationPage />} />
-            <Route path="login" element={<LoginPage />} />
-          </Route>
-
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </Suspense>
-    </>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Suspense>
   );
 }
