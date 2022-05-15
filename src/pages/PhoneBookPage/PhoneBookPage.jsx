@@ -1,7 +1,12 @@
 import Filter from '../../components/Filter';
 import { ContactList } from '../../components/ContactList';
 import ContactForm from '../../components/ContactForm';
-import { Section, H1, H2 } from '../../components/BasicStyledComponents';
+import {
+  Section,
+  H1,
+  H2,
+  Container,
+} from '../../components/BasicStyledComponents';
 import { useGetAllContactsQuery } from '../../redux/app';
 
 export const PhoneBookPage = () => {
@@ -9,19 +14,21 @@ export const PhoneBookPage = () => {
 
   return (
     <main>
-      <H1>Phone book</H1>
+      <Container>
+        <H1>Phone book</H1>
 
-      <ContactForm />
+        <ContactForm />
 
-      {isLoading && <p>...Loading</p>}
+        {isLoading && <p>...Loading</p>}
 
-      {isSuccess && (
-        <Section>
-          <H2>Сontacts</H2>
-          <Filter />
-          <ContactList />
-        </Section>
-      )}
+        {isSuccess && (
+          <Section>
+            <H2>Сontacts</H2>
+            <Filter />
+            <ContactList />
+          </Section>
+        )}
+      </Container>
     </main>
   );
 };

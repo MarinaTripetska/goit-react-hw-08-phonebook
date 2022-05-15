@@ -29,13 +29,29 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="email" name="email" value={email} onChange={nandleChange} />
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={nandleChange}
-      />
+      <label htmlFor="loginEmail">
+        Email:
+        <input
+          placeholder="provide email adress"
+          id="loginEmail"
+          type="email"
+          name="email"
+          value={email}
+          onChange={nandleChange}
+        />
+      </label>
+
+      <label htmlFor="loginPassword">
+        Password:
+        <input
+          placeholder="provide no less than 7 symbol"
+          id="loginPassword"
+          type="password"
+          name="password"
+          value={password}
+          onChange={nandleChange}
+        />
+      </label>
 
       <button type="subbmit">Log in</button>
     </form>

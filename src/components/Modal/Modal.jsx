@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Overlay, ModalWindow } from './Modal.styled';
+import { Overlay, ModalWindow, Button } from './Modal.styled';
 export const Modal = ({ onClose, children }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -25,9 +25,7 @@ export const Modal = ({ onClose, children }) => {
     <Overlay onClick={handleOverlayClick}>
       <ModalWindow>
         {children}
-        <button type="button" onClick={() => onClose()}>
-          X
-        </button>
+        <Button type="button" children={'x'} onClick={() => onClose()} />
       </ModalWindow>
     </Overlay>,
     document.getElementById('modal-portal')

@@ -1,9 +1,12 @@
+import { Container } from 'components/BasicStyledComponents';
 import { LoginForm } from 'components/LoginForm';
 
 const LoginPage = () => {
   return (
     <main>
-      <LoginForm />
+      <Container>
+        <LoginForm />
+      </Container>
     </main>
   );
 };

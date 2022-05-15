@@ -13,11 +13,13 @@ export const Overlay = styled.div`
 export const ModalWindow = styled.div`
   position: absolute;
   width: 100%;
-  max-width: 100vw;
-  max-height: 100vh;
+  max-width: 70vw;
+  max-height: 50vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding: 25px;
+  background-color: #fff;
 
   @media screen and (min-width: 768px) {
     max-width: 768px;
@@ -26,4 +28,21 @@ export const ModalWindow = styled.div`
   @media screen and (min-width: 1200px) {
     max-width: 1200px;
   }
+`;
+
+export const Button = styled.button`
+  position: absolute;
+  top: -50px;
+  right: -10px;
+
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
 `;

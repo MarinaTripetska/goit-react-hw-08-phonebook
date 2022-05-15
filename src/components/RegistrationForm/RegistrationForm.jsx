@@ -32,14 +32,30 @@ export const RegistrationForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="name" value={name} onChange={handleChange} />
-      <input type="email" name="email" value={email} onChange={handleChange} />
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={handleChange}
-      />
+      <label htmlFor="">
+        Your name:
+        <input type="text" name="name" value={name} onChange={handleChange} />
+      </label>
+      <br />
+      <label htmlFor="">
+        Your email:
+        <input
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label htmlFor="">
+        Your password:
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+        />
+      </label>
 
       <button type="subbmit">Register</button>
     </form>
