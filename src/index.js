@@ -13,19 +13,17 @@ import { ThemeProvider } from '@mui/material';
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-  <>
-    <React.StrictMode>
-      <BrowserRouter basename="/goit-react-hw-08-phonebook/">
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <App />
-              <Toaster />
-            </PersistGate>
-          </Provider>
-        </ThemeProvider>
-      </BrowserRouter>
-    </React.StrictMode>
-  </>
+  <React.StrictMode>
+    <BrowserRouter basename="/goit-react-hw-08-phonebook/">
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <App />
+            <Toaster />
+          </PersistGate>
+        </Provider>
+      </ThemeProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
