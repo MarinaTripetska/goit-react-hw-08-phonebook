@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import { theme } from './components/ColorTheme';
+import { theme } from 'components/ColorTheme';
 import { ThemeProvider } from '@mui/material';
 
 const container = document.getElementById('root');
