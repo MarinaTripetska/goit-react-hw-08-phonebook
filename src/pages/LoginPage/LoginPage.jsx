@@ -1,13 +1,11 @@
-import { Container } from 'components/BasicStyledComponents';
 import { LoginForm } from 'components/LoginForm';
+import { Container } from '@mui/material';
 
 const LoginPage = () => {
   return (
-    <main>
-      <Container>
-        <LoginForm />
-      </Container>
-    </main>
+    <Container component="main" maxWidth="xs">
+      <LoginForm />
+    </Container>
   );
 };
 

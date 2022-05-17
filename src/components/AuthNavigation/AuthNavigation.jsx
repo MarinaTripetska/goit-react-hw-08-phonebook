@@ -1,10 +1,9 @@
-import { NavLink } from 'react-router-dom';
-
+import { StyledNavigationLink } from '../StyledNavigationLink';
 export const AuthNavigation = () => {
   return (
     <div style={{ display: 'flex', gap: '10px' }}>
-      <NavLink to={'/register'}>Registraition</NavLink>
-      <NavLink to={'/login'}>Log in</NavLink>
+      <StyledNavigationLink toPath="/register" name="Sign up" />
+      <StyledNavigationLink toPath="/login" name="Log in" />
     </div>
   );
 };

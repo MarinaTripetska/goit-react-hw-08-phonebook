@@ -11,15 +11,26 @@ const token = {
     axios.defaults.headers.Authorization = '';
   },
 };
-const register = createAsyncThunk('auth/register', async credentials => {
-  try {
-    const { data } = await axios.post('/users/signup', credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    //обработка ошибки error.message
+
+const register = createAsyncThunk(
+  'auth/register',
+  async (userData, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/users/signup', userData);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      if ((error.status = 400)) {
+        return thunkAPI.rejectWithValue('Thomethig went wrong. Try again!');
+      }
+      if ((error.status = 500)) {
+        return thunkAPI.rejectWithValue(
+          'We have problems with server. Please, try later'
+        );
+      }
+    }
   }
-});
+);
 
 const logIn = createAsyncThunk('auth/login', async credentials => {
   try {
@@ -51,6 +62,7 @@ const fetchCurrentUser = createAsyncThunk(
     }
 
     token.set(persistedToken);
+
     try {
       const { data } = await axios.get('/users/current');
       return data;

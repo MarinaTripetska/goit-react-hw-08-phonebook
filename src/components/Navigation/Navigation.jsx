@@ -1,14 +1,16 @@
-import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { authSelectors } from 'redux/app/authorization';
+import { StyledNavigationLink } from '../StyledNavigationLink';
 
 export const Navigation = () => {
   const isLoggedIn = useSelector(authSelectors.getIsLoggenIn);
-
   return (
     <>
-      <NavLink to={'/'}>Start Page</NavLink>
-      {isLoggedIn && <NavLink to={'/phonebook'}>Phone Book</NavLink>}
+      <StyledNavigationLink toPath="/" name="Start page" />
+
+      {isLoggedIn && (
+        <StyledNavigationLink toPath={'/phonebook'} name="Phone Book" />
+      )}
     </>
   );
 };

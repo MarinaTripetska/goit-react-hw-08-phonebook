@@ -11,6 +11,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
@@ -23,14 +24,6 @@ const middleware = [
 export const store = configureStore({
   reducer: rootReducer,
   middleware,
-  //     : getDefaultMiddleware => [
-  //     getDefaultMiddleware({
-  //       serializableCheck: {
-  //         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-  //       },
-  //     }),
-  //     contactsApi.middleware,
-  //   ],
 });
 
 setupListeners(store.dispatch);

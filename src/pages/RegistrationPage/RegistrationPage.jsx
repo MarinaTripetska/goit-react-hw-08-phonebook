@@ -1,13 +1,11 @@
-import { Container } from 'components/BasicStyledComponents';
+import { Container } from '@mui/material';
 import { RegistrationForm } from 'components/RegistrationForm';
 
 export const RegistrationPage = () => {
   return (
-    <main>
-      <Container>
-        <RegistrationForm />
-      </Container>
-    </main>
+    <Container component="main" maxWidth="xs">
+      <RegistrationForm />
+    </Container>
   );
 };
 

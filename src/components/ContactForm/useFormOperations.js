@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import {
   contactsApi,
   useCreateContactMutation,
   useEditContactMutation,
 } from '../../redux/app';
-
-const notifyERROR = text => toast.error(text);
-const notifySUCCESS = text => toast.success(text);
+import { myToast } from '../Toast';
 
 const useFormOperations = ({ contactId, closeForm, name, number }) => {
   const { data: contacts } = useSelector(
@@ -24,8 +21,10 @@ const useFormOperations = ({ contactId, closeForm, name, number }) => {
   const smartEdit = values => {
     editContact({ id: contactId, ...values })
       .unwrap()
-      .then(() => notifySUCCESS(`${inputName} updated`))
-      .catch(r => notifyERROR(`Something went wrong. Eroor: ${r.status}`));
+      .then(() => myToast.notifySUCCESS(`${inputName} updated`))
+      .catch(r =>
+        myToast.myToast.notifyERROR(`Something went wrong. Eroor: ${r.status}`)
+      );
 
     closeForm();
   };
@@ -33,8 +32,10 @@ const useFormOperations = ({ contactId, closeForm, name, number }) => {
   const smartCreate = values => {
     createContact(values)
       .unwrap()
-      .then(() => notifySUCCESS(`New contact for ${inputName} added`))
-      .catch(r => notifyERROR(`Something went wrong. Eroor: ${r.status}`));
+      .then(() => myToast.notifySUCCESS(`New contact for ${inputName} added`))
+      .catch(r =>
+        myToast.notifyERROR(`Something went wrong. Eroor: ${r.status}`)
+      );
 
     setInputName('');
     setInputNumber('');
@@ -54,11 +55,11 @@ const useFormOperations = ({ contactId, closeForm, name, number }) => {
 
     if (contactId) {
       contactExists
-        ? notifyERROR(`Contact is already exist!`)
+        ? myToast.notifyERROR(`Contact is already exist!`)
         : smartEdit(values);
     } else if (!contactId) {
       nameExists
-        ? notifyERROR(`${inputName} already exist!`)
+        ? myToast.notifyERROR(`${inputName} already exist!`)
         : smartCreate(values);
     }
   };
