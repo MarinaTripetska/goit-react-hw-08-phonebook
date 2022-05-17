@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgoit_react_hw_08_phonebook=self.webpackChunkgoit_react_hw_08_phonebook||[]).push([[686,680],{680:function(e,n,t){t.r(n);var o=t(2702),r=t(184);n.default=function(){return(0,r.jsx)("main",{children:(0,r.jsx)(o.W,{children:(0,r.jsx)("h1",{children:"Welcome to HomeWork 8 Start Page! "})})})}},1686:function(e,n,t){t.r(n),t.d(n,{default:function(){return o.default}});var o=t(680)}}]);
-//# sourceMappingURL=686.3ff18ea2.chunk.js.map

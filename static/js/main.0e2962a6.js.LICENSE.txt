@@ -79,15 +79,10 @@
  * @license MIT
  */
 
-/**
- * React Router v6.3.0
- *
- * Copyright (c) Remix Software Inc.
+/** @license MUI v5.7.0
  *
  * This source code is licensed under the MIT license found in the
- * LICENSE.md file in the root directory of this source tree.
- *
- * @license MIT
+ * LICENSE file in the root directory of this source tree.
  */
 
 /** @license React v16.13.1
