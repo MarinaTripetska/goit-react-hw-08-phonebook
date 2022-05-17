@@ -3,7 +3,7 @@ import { Navigation } from 'components/Navigation';
 import { UserMenu } from 'components/UserMenu';
 import { useSelector } from 'react-redux';
 import { authSelectors } from 'redux/app/authorization';
-import { AppBar as AppBarMUI, Box, Toolbar, Typography } from '@mui/material';
+import { AppBar as AppBarMUI, Box, Toolbar } from '@mui/material';
 
 export const AppBar = () => {
   const isLoggedIn = useSelector(authSelectors.getIsLoggenIn);
