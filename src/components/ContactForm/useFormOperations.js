@@ -5,7 +5,7 @@ import {
   useCreateContactMutation,
   useEditContactMutation,
 } from '../../redux/app';
-import { myToast } from '../Toast';
+import { Toast } from '../Toast';
 
 const useFormOperations = ({ contactId, closeForm, name, number }) => {
   const { data: contacts } = useSelector(
@@ -21,9 +21,9 @@ const useFormOperations = ({ contactId, closeForm, name, number }) => {
   const smartEdit = values => {
     editContact({ id: contactId, ...values })
       .unwrap()
-      .then(() => myToast.notifySUCCESS(`${inputName} updated`))
+      .then(() => Toast.notifySUCCESS(`${inputName} updated`))
       .catch(r =>
-        myToast.myToast.notifyERROR(`Something went wrong. Eroor: ${r.status}`)
+        Toast.notifyERROR(`Something went wrong. Eroor: ${r.status}`)
       );
 
     closeForm();
@@ -32,9 +32,9 @@ const useFormOperations = ({ contactId, closeForm, name, number }) => {
   const smartCreate = values => {
     createContact(values)
       .unwrap()
-      .then(() => myToast.notifySUCCESS(`New contact for ${inputName} added`))
+      .then(() => Toast.notifySUCCESS(`New contact for ${inputName} added`))
       .catch(r =>
-        myToast.notifyERROR(`Something went wrong. Eroor: ${r.status}`)
+        Toast.notifyERROR(`Something went wrong. Eroor: ${r.status}`)
       );
 
     setInputName('');
@@ -55,11 +55,11 @@ const useFormOperations = ({ contactId, closeForm, name, number }) => {
 
     if (contactId) {
       contactExists
-        ? myToast.notifyERROR(`Contact is already exist!`)
+        ? Toast.notifyERROR(`Contact is already exist!`)
         : smartEdit(values);
     } else if (!contactId) {
       nameExists
-        ? myToast.notifyERROR(`${inputName} already exist!`)
+        ? Toast.notifyERROR(`${inputName} already exist!`)
         : smartCreate(values);
     }
   };

@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrivateRoute } from './components/PrivateRoute';
 import { PublicRoute } from './components/PublicRoute';
-import { myToast } from './components/Toast';
+import { Toast } from './components/Toast';
 import {
   authOperations,
   authSelectors,
@@ -29,11 +29,11 @@ export default function App() {
 
   useEffect(() => {
     if (isError) {
-      myToast.notifyERROR(message);
+      Toast.notifyERROR(message);
     }
 
     if (isLoggedIn) {
-      myToast.notifySUCCESS(`Welcome, ${userName}!`);
+      Toast.notifySUCCESS(`Welcome, ${userName}!`);
     }
 
     dispatch(reset());
